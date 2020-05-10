@@ -56,11 +56,7 @@ const propTypes = {
   /**
    * If specified it'll be shown before text
    */
-  icon: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.string,
-    PropTypes.object,
-  ]),
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   /**
    * Leave it empty if you don't want any transition after press. Otherwise, it will be trnasform
    * to another view - depends on transition value.
@@ -71,7 +67,7 @@ const propTypes = {
    */
   rippleColor: PropTypes.string,
   /**
-   * You can override any style for this button
+   * You can overide any style for this button
    */
   style: PropTypes.shape({
     container: ViewPropTypes.style,
@@ -447,10 +443,6 @@ class ActionButton extends PureComponent {
     let result;
     if (React.isValidElement(icon)) {
       result = icon;
-    } else if (icon.name && icon.iconSet) {
-      result = (
-        <Icon name={icon.name} iconSet={icon.iconSet} style={styles.icon} />
-      );
     } else {
       result = <Icon name={icon} style={styles.icon} />;
     }

@@ -9,6 +9,7 @@ import CenterElement from './CenterElement.react';
 import RightElement from './RightElement.react';
 import isFunction from '../utils/isFunction';
 import withTheme from '../styles/withTheme';
+import LinearGradient from 'react-native-linear-gradient';
 
 const propTypes = {
   /**
@@ -61,7 +62,7 @@ const propTypes = {
     icon: PropTypes.string,
   }),
   /**
-   * You can override any style for the component via this prop
+   * You can overide any style for the component via this prop
    */
   style: PropTypes.shape({
     container: ViewPropTypes.style,
@@ -450,32 +451,36 @@ class Toolbar extends PureComponent {
       <Animated.View
         onLayout={this.onLayout}
         style={[
-          styles.container,
           { transform: [{ translateY: positionValue }] },
         ]}
       >
-        {this.renderAnimatedBackgrounds(styles)}
-        <LeftElement
-          {...this.props}
-          onLeftElementPress={onLeftElementPress}
-          isSearchActive={isSearchActiveInternal}
-          onSearchClose={this.onSearchCloseRequested}
-        />
-        <CenterElement
-          {...this.props}
-          onPress={onPress}
-          searchValue={searchValue}
-          isSearchActive={isSearchActiveInternal}
-          onSearchTextChange={this.onSearchTextChanged}
-        />
-        <RightElement
-          {...this.props}
-          searchValue={searchValue}
-          isSearchActive={isSearchActiveInternal}
-          onSearchPress={this.onSearchPressed}
-          onSearchClearRequest={this.onSearchClearRequested}
-          onRightElementPress={onRightElementPress}
-        />
+        <View style={[
+          styles.container,
+          this.props.customStyle
+        ]}>
+          {this.renderAnimatedBackgrounds(styles)}
+          <LeftElement
+            {...this.props}
+            onLeftElementPress={onLeftElementPress}
+            isSearchActive={isSearchActiveInternal}
+            onSearchClose={this.onSearchCloseRequested}
+          />
+          <CenterElement
+            {...this.props}
+            onPress={onPress}
+            searchValue={searchValue}
+            isSearchActive={isSearchActiveInternal}
+            onSearchTextChange={this.onSearchTextChanged}
+          />
+          <RightElement
+            {...this.props}
+            searchValue={searchValue}
+            isSearchActive={isSearchActiveInternal}
+            onSearchPress={this.onSearchPressed}
+            onSearchClearRequest={this.onSearchClearRequested}
+            onRightElementPress={onRightElementPress}
+          />
+        </View>
       </Animated.View>
     );
   }

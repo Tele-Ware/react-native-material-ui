@@ -119,6 +119,7 @@ class CenterElement extends PureComponent {
       onPress,
       onSearchTextChange,
       searchValue,
+      rtl
     } = this.props;
     const { opacityValue, isSearchActive } = this.state;
     const styles = getStyles(this.props, this.state);
@@ -146,14 +147,16 @@ class CenterElement extends PureComponent {
           onChangeText={onSearchTextChange}
           onSubmitEditing={searchable.onSubmitEditing}
           placeholder={searchable.placeholder}
-          style={[styles.titleText, { marginLeft: 0 }]}
+          allowFontScaling={false}
+
+          style={[styles.titleText, { marginLeft: 0, textAlign: rtl ? 'right' : 'left' }]}
           underlineColorAndroid="transparent"
           value={searchValue}
         />
       );
     } else if (typeof centerElement === 'string') {
       content = (
-        <Text numberOfLines={1} style={styles.titleText}>
+        <Text numberOfLines={1} style={styles.titleText} allowFontScaling={false}>
           {centerElement}
         </Text>
       );

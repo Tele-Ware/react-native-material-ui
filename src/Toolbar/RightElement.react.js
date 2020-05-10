@@ -8,6 +8,7 @@ import { ViewPropTypes } from '../utils';
 import withTheme from '../styles/withTheme';
 import IconToggle from '../IconToggle';
 import isFunction from '../utils/isFunction';
+import { Colors } from '../../../../src/Constants';
 
 const { UIManager } = NativeModules;
 
@@ -130,7 +131,7 @@ class RightElement extends PureComponent {
         return (
           <IconToggle
             key={action}
-            name={action}
+            name={"action"}
             color={flattenRightElement.color}
             size={size}
             style={flattenRightElement}
@@ -167,13 +168,15 @@ class RightElement extends PureComponent {
           );
         }
       } else {
-        result.push(
+        result.unshift(
           <IconToggle
             key="searchIcon"
             name={searchable.icon ? searchable.icon : 'search'}
-            color={flattenRightElement.color}
+            color={Colors.Primary}
             size={size}
-            style={flattenRightElement}
+            // style={flattenRightElement}
+            style={{container:{marginTop:7}}}
+            
             onPress={this.onSearchPressed}
           />,
         );

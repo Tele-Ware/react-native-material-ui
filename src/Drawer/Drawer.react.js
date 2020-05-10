@@ -14,7 +14,6 @@ const propTypes = {
   children: PropTypes.node.isRequired,
   style: PropTypes.shape({
     container: ViewPropTypes.style,
-    contentContainer: ViewPropTypes.style,
   }),
 };
 const defaultProps = {
@@ -26,7 +25,6 @@ function getStyles(props) {
 
   return {
     container: [drawer.container, props.style.container],
-    contentContainer: [drawer.contentContainer, props.style.contentContainer],
   };
 }
 
@@ -38,12 +36,7 @@ class Drawer extends PureComponent {
 
     return (
       <Container>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          style={styles.container}
-        >
-          {children}
-        </ScrollView>
+        <ScrollView style={styles.container}>{children}</ScrollView>
       </Container>
     );
   }

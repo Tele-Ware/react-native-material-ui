@@ -11,8 +11,8 @@ export default {
   fontFamily: 'Roboto',
   palette: {
     // main theme colors
-    primaryColor: blue500,
-    accentColor: red500,
+    // primaryColor: blue500,
+    // accentColor: red500,
     // text color palette
     primaryTextColor: Color(black)
       .alpha(0.87)

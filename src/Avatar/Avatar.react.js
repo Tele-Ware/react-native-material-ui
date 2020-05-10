@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved, import/extensions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ViewPropTypes } from '../utils';
 /* eslint-enable import/no-unresolved, import/extensions */
 import Icon from '../Icon';
@@ -86,7 +86,6 @@ class Avatar extends PureComponent {
       iconColor,
       text,
       theme,
-      size,
     } = this.props;
     const { avatar, spacing } = theme;
 
@@ -95,25 +94,15 @@ class Avatar extends PureComponent {
     const styles = getStyles(this.props);
 
     if (icon) {
+      const color = iconColor || StyleSheet.flatten(avatar.content).color;
+      const size = iconSize || spacing.iconSize;
       content = (
-        <Icon
-          iconSet={iconSet}
-          name={icon}
-          color={iconColor || StyleSheet.flatten(avatar.content).color}
-          size={iconSize || spacing.iconSize}
-        />
+        <Icon iconSet={iconSet} name={icon} color={color} size={size} />
       );
     } else if (text) {
       content = <Text style={styles.content}>{text}</Text>;
-    } else if (React.isValidElement(image)) {
+    } else if (image) {
       content = image;
-    } else if (typeof image === 'string') {
-      content = (
-        <Image
-          style={{ width: size, height: size, borderRadius: size / 2 }}
-          source={{ uri: image }}
-        />
-      );
     }
 
     return (

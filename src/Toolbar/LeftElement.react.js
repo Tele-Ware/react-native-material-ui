@@ -129,7 +129,7 @@ class LeftElement extends PureComponent {
       iconSet,
     } = this.props;
 
-    if (!leftElement) {
+    if (!leftElement ) {
       return null;
     }
 
@@ -152,17 +152,18 @@ class LeftElement extends PureComponent {
     const flattenLeftElement = StyleSheet.flatten(styles.leftElement);
     const spin = spinValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0deg', '180deg'],
+      outputRange: [this.props.rtl?'180deg':'0deg', this.props.rtl?'0deg':'180deg'],
     });
 
     return (
       <Animated.View
+      
         testID={leftElementTestID}
         style={[styles.leftElementContainer, { transform: [{ rotate: spin }] }]}
       >
         <IconToggle
           key={leftElement}
-          name={leftElement}
+          name={'arrow-forward'}
           color={flattenLeftElement.color}
           onPress={onPress}
           size={size}
@@ -170,6 +171,24 @@ class LeftElement extends PureComponent {
           style={flattenLeftElement}
         />
       </Animated.View>
+      // <Animated.View
+      //   testID={leftElementTestID}
+      //   style={[styles.leftElementContainer, { transform: [{ rotate: spin }] }]}
+      // >
+      //   {
+      //       React.isValidElement(leftElement) ?
+      //       leftElement :
+      //       <IconToggle
+      //         key={leftElement}
+      //         name={leftElement}
+      //         color={flattenLeftElement.color}
+      //         onPress={onPress}
+      //         size={size}
+      //         iconSet={iconSet}
+      //         style={flattenLeftElement}
+      //       />
+      //   }
+      // </Animated.View>
     );
   }
 }
